@@ -5,6 +5,13 @@ journal.html
 journal.pdf
 journal.tex
 
+# R / R Markdown
+.Rhistory
+.RData
+.Rproj.user/
+Experiment/analysis.html
+Experiment/analysis.Rmd
+
 # Object files
 *.o
 *.ko
