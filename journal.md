@@ -42,6 +42,33 @@
 
 ---
 
+## 2026-11-03 — Smoke tests and first full baseline on WSL2
+
+**What was done**
+- Built the baseline (`-O0`, `THREAD_LEVEL=10`).
+- Smoke tests at 20:40 and 20:46: sizes 1000, 10000, 100000, 1000000 with 2
+  repetitions each (8 size records and 24 CSV data rows per run).
+- Full benchmark at 20:58 with Opera GX open (~1.6 GiB RAM) and at 21:02
+  without it: sizes 100 to 10,000,000 with 10 repetitions (70 size records and
+  210 CSV data rows per run).
+- All runs completed with no `Oops` lines.
+- Preliminary mean speedup (Sequential / Parallel) crosses 1 between 1M
+  (0.84x) and 5M (1.02x), reaching 1.07x at 10M. The 20:58 run is slower than
+  the 21:02 run mainly around 1M (parallel ~5% slower), so Opera GX adds noise
+  but does not change the trend.
+
+**Individual results**
+- draken: ran the smoke tests and both full runs on WSL2; all datasets are in
+  `data/Draken_2026-11-03/`.
+- Member 2: ____________
+- Member 3: ____________
+
+Note: the 21:02 run is the clean baseline. Ten repetitions are enough for a
+first analysis; a second clean session would still be useful to check
+session-to-session stability.
+
+---
+
 <!-- TEMPLATE: copy this block for each new session
 
 ## YYYY-MM-DD — <short title>

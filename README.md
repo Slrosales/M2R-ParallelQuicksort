@@ -23,18 +23,64 @@ methodology through a small multi-threaded quicksort implementation.
 
 ## Quick start
 
+Build and run one instance:
+
 ```bash
-make -C src/                          # compile
-./src/parallelQuicksort 1000000       # single run
-./scripts/run_benchmarking.sh         # full benchmark (randomized order)
+make -C src/
+./src/parallelQuicksort 1000000
 ```
+
+## Running the benchmark
+
+Always smoke-test before a full run:
+
+```bash
+LC_ALL=C REPS=2 ./scripts/run_benchmarking.sh 1000 10000 100000 1000000
+```
+
+Then run the full benchmark (default sizes `100 ... 10000000`, 10 repetitions):
+
+```bash
+LC_ALL=C REPS=10 ./scripts/run_benchmarking.sh
+```
+
+`REPS` sets the number of repetitions; positional arguments override the default
+sizes. `LC_ALL=C` keeps the `lscpu | grep` metadata extraction working under
+`set -o pipefail`.
+
+After a run, check that no sort failed and that every repetition is present:
+
+```bash
+ls data/$(hostname)_$(date +%F)/
+grep -R "Oops" data/$(hostname)_$(date +%F)/ || echo "no sorting failures"
+```
+
+Notes:
+
+- Results go to `data/<machine>_<date>/measurements_<HH:MM>.txt`. The filename
+  has minute resolution, so do not launch two runs in the same minute.
+- Keep the raw `.txt` file: it contains the machine and run metadata as `#`
+  lines.
+- The script randomizes the `(size, repetition)` order only. Within a process
+  the algorithms still run Sequential -> Parallel -> libc.
+- `THREAD_LEVEL` and the optimization level are compile-time settings
+  (`src/parallelQuicksort.c`, `src/Makefile`). Record them with the results.
+- On WSL2, close heavy applications and repeat the session; the CPU is shared
+  with Windows.
+- Do not modify `data/sama_2014-10-13/`, which is the reference dataset.
+- Record the environment if the script does not: `gcc --version | head -1` and
+  `git rev-parse --short HEAD`.
+
+## Parsing results
 
 Parse raw output into long-format CSV:
 
 ```bash
-perl scripts/csv_quicksort_extractor.pl < data/<machine>_<date>/measurements_<HH:MM>.txt \
-    > data/<machine>_<date>/measurements_<HH:MM>.csv
+perl scripts/csv_quicksort_extractor.pl < data/$(hostname)_$(date +%F)/measurements_HH:MM.txt \
+  > data/$(hostname)_$(date +%F)/measurements_HH:MM.csv
 ```
+
+## Rendering the analysis
 
 Render the analysis notebook from `Experiment/`:
 
