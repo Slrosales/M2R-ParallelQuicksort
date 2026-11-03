@@ -1,0 +1,39 @@
+# Machine: Draken
+# Date:    2026-11-03 20:40:30
+# Kernel:  Linux 6.18.54.1-microsoft-standard-WSL2 x86_64
+# CPU:     Model name:                              12th Gen Intel(R) Core(TM) i5-12450H
+# CPUs:    CPU(s):                                  12
+# Sizes:   1000 10000 100000 1000000
+# Reps:    2
+Size: 100000
+Sequential quicksort took: 0.010707 sec.
+Parallel quicksort took: 0.066178 sec.
+Built-in quicksort took: 0.012087 sec.
+Size: 1000
+Sequential quicksort took: 0.000070 sec.
+Parallel quicksort took: 0.020717 sec.
+Built-in quicksort took: 0.000071 sec.
+Size: 1000000
+Sequential quicksort took: 0.129368 sec.
+Parallel quicksort took: 0.141402 sec.
+Built-in quicksort took: 0.132429 sec.
+Size: 10000
+Sequential quicksort took: 0.000840 sec.
+Parallel quicksort took: 0.053562 sec.
+Built-in quicksort took: 0.000964 sec.
+Size: 1000000
+Sequential quicksort took: 0.124067 sec.
+Parallel quicksort took: 0.151153 sec.
+Built-in quicksort took: 0.131440 sec.
+Size: 100000
+Sequential quicksort took: 0.010311 sec.
+Parallel quicksort took: 0.045502 sec.
+Built-in quicksort took: 0.011164 sec.
+Size: 10000
+Sequential quicksort took: 0.000942 sec.
+Parallel quicksort took: 0.036160 sec.
+Built-in quicksort took: 0.000878 sec.
+Size: 1000
+Sequential quicksort took: 0.000069 sec.
+Parallel quicksort took: 0.021122 sec.
+Built-in quicksort took: 0.000104 sec.
