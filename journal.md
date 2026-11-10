@@ -6,7 +6,7 @@
 ## Members
 
 - Member 1: draken (WSL2 machine)
-- Member 2: ____________
+- Member 2: Ubuntu (OrbStack on Apple M3)
 - Member 3: ____________
 
 ---
@@ -66,6 +66,54 @@
 Note: the 21:02 run is the clean baseline. Ten repetitions are enough for a
 first analysis; a second clean session would still be useful to check
 session-to-session stability.
+
+---
+
+## 2026-11-10 — Ubuntu/OrbStack benchmark on Apple M3
+
+**What was done**
+- Built and ran the same baseline configuration as the WSL2 experiments:
+  `-O0` and `THREAD_LEVEL=10`.
+- Ran a smoke test at 10:43 with sizes 1000, 10000, 100000, and 1000000,
+  using 2 repetitions (8 size records and 24 CSV data rows).
+- Ran the complete benchmark with sizes 100 to 10,000,000, including both
+  5000000 and 10000000, using 10 repetitions. Complete runs are stored at
+  `data/ubuntu_2026-11-10/measurements_10:04.*`,
+  `measurements_10:48.*`, and `measurements_10:51.*`.
+- The last complete run, at 10:51, was performed as a clean run with the
+  applications consuming resources on the host machine closed.
+- All runs completed without `Oops` sorting failures. The raw `.txt` files
+  record the same Linux environment: OrbStack kernel on `aarch64`, Apple M3,
+  and 8 reported CPUs.
+
+**Individual results**
+- Ubuntu: completed the smoke test and the full benchmark on a separate
+  Linux virtualized environment running on an Apple M3. 
+
+**Analysis**
+- The measurements show a clear fixed overhead for the parallel version at
+  small and medium sizes. For sizes up to 100000, it is consistently slower
+  than the sequential version, so creating and synchronizing threads costs
+  more than the parallel execution saves.
+- The parallel version becomes closer to the sequential one for larger
+  arrays, but it does not become consistently faster on this machine. In the
+  clean 10:51 run, the parallel/sequential mean speedup was approximately
+  0.93x at both 5000000 and 10000000. A value below 1 means that the
+  parallel version was slower; at 10000000, for example, it took about
+  1.63 seconds compared with about 1.52 seconds for the sequential version.
+- The 10:04 run was the closest to parity at 1000000, with a speedup of
+  approximately 1.01x, but the later complete runs were below 1 at that
+  size. This variation shows that the result near the crossover point is
+  sensitive to run conditions, even with repeated measurements.
+- Compared with the clean Draken run, where the parallel version reached
+  approximately 1.02x at 5000000 and 1.07x at 10000000, the Apple M3
+  environment does not show the same speedup trend. This comparison is
+  descriptive rather than a direct hardware ranking, the experiments ran
+  on different processors and virtualization environments.
+- Overall, these results complement the WSL2 baseline by showing that the
+  usefulness of this parallel implementation depends on the machine and
+  workload size. The same benchmark configuration does not guarantee a
+  speedup on every platform.
 
 ---
 

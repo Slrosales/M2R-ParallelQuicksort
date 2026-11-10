@@ -1,0 +1,39 @@
+# Machine: ubuntu
+# Date:    2026-11-10 10:43:46
+# Kernel:  Linux 7.2.12-orbstack-00394-gbecdd6130068 aarch64
+# CPU:     Model name:                              Apple m3
+# CPUs:    CPU(s):                                  8
+# Sizes:   1000 10000 100000 1000000
+# Reps:    2
+Size: 100000
+Sequential quicksort took: 0.015502 sec.
+Parallel quicksort took: 0.036203 sec.
+Built-in quicksort took: 0.013239 sec.
+Size: 10000
+Sequential quicksort took: 0.000998 sec.
+Parallel quicksort took: 0.014502 sec.
+Built-in quicksort took: 0.000850 sec.
+Size: 1000000
+Sequential quicksort took: 0.119974 sec.
+Parallel quicksort took: 0.123013 sec.
+Built-in quicksort took: 0.123237 sec.
+Size: 1000000
+Sequential quicksort took: 0.120845 sec.
+Parallel quicksort took: 0.142917 sec.
+Built-in quicksort took: 0.122569 sec.
+Size: 10000
+Sequential quicksort took: 0.000863 sec.
+Parallel quicksort took: 0.016890 sec.
+Built-in quicksort took: 0.000810 sec.
+Size: 100000
+Sequential quicksort took: 0.010274 sec.
+Parallel quicksort took: 0.020241 sec.
+Built-in quicksort took: 0.010133 sec.
+Size: 1000
+Sequential quicksort took: 0.000067 sec.
+Parallel quicksort took: 0.005283 sec.
+Built-in quicksort took: 0.000070 sec.
+Size: 1000
+Sequential quicksort took: 0.000073 sec.
+Parallel quicksort took: 0.005354 sec.
+Built-in quicksort took: 0.000068 sec.
